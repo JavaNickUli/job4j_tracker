@@ -6,19 +6,30 @@ import static java.lang.Math.sqrt;
 public class Point {
     private int x;
     private int y;
+    private int z;
 
     public Point(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    public static void main(String[] args) {
-        Point a = new Point(0, 0);
-        Point b = new Point(0, 2);
-        System.out.println("result (0, 0) to (2, 0) " + a.distance(b));
+
+    public Point(int x, int y, int z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
+    public void info() {
+        System.out.println("Point[" + this.x + ", " + this.y + ", " + this.z + "]");
     }
 
     public double distance(Point point) {
         return sqrt(pow(point.x - this.x, 2) + pow(point.y - this.y, 2));
     }
+
+    public double distance3d(Point point) {
+        return sqrt(pow(point.x - this.x, 2) + pow(point.y - this.y, 2) + pow(point.z - this.z, 2));
+    }
+
 }
