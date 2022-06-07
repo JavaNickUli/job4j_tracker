@@ -14,13 +14,12 @@ public class Matches {
             int possible = Math.min(count, 3);
             System.out.println(player + " введите число от 1 до " + possible + ":");
             int matches = Integer.parseInt(input.nextLine());
-            turn = !turn;
             if (matches > 0 && matches <= possible) {
                 count -= matches;
                 System.out.println("Осталось " + count + " спичек на столе.");
+                turn = !turn;
             } else {
                 System.out.println("Не верно введено количество. Попробуйте еще раз.");
-                turn = !turn;
             }
         }
         if (!turn) {
