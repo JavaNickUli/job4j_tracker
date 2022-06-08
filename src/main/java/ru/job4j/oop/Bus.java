@@ -1,9 +1,9 @@
 package ru.job4j.oop;
 
 public class Bus implements Vehicle {
-    String name;
+    private String name;
 
-    Bus(String name) {
+    public Bus(String name) {
         this.name = name;
     }
 
