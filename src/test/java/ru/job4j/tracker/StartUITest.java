@@ -14,7 +14,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         UserAction[] actions = {
                 new CreateAction(out),
-                new Exit()
+                new ExitAction(out)
         };
         new StartUI(out).init(in, tracker, actions);
         Assert.assertEquals(tracker.findAll()[0].getName(), "Item name");
@@ -32,7 +32,7 @@ public class StartUITest {
         );
         UserAction[] actions = {
                 new ReplaceAction(out),
-                new Exit()
+                new ExitAction(out)
         };
         new StartUI(out).init(in, tracker, actions);
         Assert.assertEquals(tracker.findById(item.getId()).getName(), replacedName);
@@ -49,7 +49,7 @@ public class StartUITest {
         );
         UserAction[] actions = {
                 new DeleteAction(out),
-                new Exit()
+                new ExitAction(out)
         };
         new StartUI(out).init(in, tracker, actions);
         Assert.assertNull(tracker.findById(item.getId()));
