@@ -9,7 +9,7 @@ public class ValidateInputTest {
     public void whenInvalidInput() {
         Output out = new StubOutput();
         Input in = new StubInput(
-                new String[] {"one", "1"}
+                new String[]{"one", "1"}
         );
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Enter menu:");
@@ -20,7 +20,7 @@ public class ValidateInputTest {
     public void whenValidInput() {
         Output out = new StubOutput();
         Input in = new StubInput(
-                new String[] {"3"}
+                new String[]{"3"}
         );
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Enter menu:");
@@ -34,9 +34,9 @@ public class ValidateInputTest {
         Input in = new StubInput(str);
         ValidateInput input = new ValidateInput(out, in);
         String[] selected = new String[3];
-        for (int i = 0; i < 3; i++) {
-            selected[i] = String.valueOf(input.askInt("Enter menu:"));
-        }
+        selected[0] = String.valueOf(input.askInt("Enter menu:"));
+        selected[1] = String.valueOf(input.askInt("Enter menu:"));
+        selected[2] = String.valueOf(input.askInt("Enter menu:"));
         Assert.assertArrayEquals(str, selected);
     }
 
@@ -44,7 +44,7 @@ public class ValidateInputTest {
     public void whenNegativeInput() {
         Output out = new StubOutput();
         Input in = new StubInput(
-                new String[] {"-5"}
+                new String[]{"-5"}
         );
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Enter menu:");
