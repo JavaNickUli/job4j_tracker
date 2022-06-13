@@ -29,18 +29,17 @@ public class Tracker {
     }
 
     public List<Item> findAll() {
-        return items;
+        return List.copyOf(items);
     }
 
     private int indexOf(int id) {
-        int rsl = 0;
-        for (Item item : items) {
-            if (item.getId() == id) {
-                return rsl;
+        int rsl = -1;
+        for (int index = 0; index < items.size(); index++) {
+            if (items.get(index).getId() == id) {
+                rsl = index;
             }
-            rsl++;
         }
-        return -1;
+        return rsl;
     }
 
     public boolean replace(int id, Item item) {
@@ -48,8 +47,7 @@ public class Tracker {
         boolean rsl = index != -1;
         if (rsl) {
             item.setId(id);
-            items.remove(index);
-            items.add(index, item);
+            items.set(index, item);
         }
         return rsl;
     }
