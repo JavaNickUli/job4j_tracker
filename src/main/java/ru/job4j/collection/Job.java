@@ -40,8 +40,4 @@ public class Job {
     public int hashCode() {
         return Objects.hash(name, priority);
     }
-//    @Override
-//    public int compareTo(Job another) {
-//        return Integer.compare(priority, another.priority);
-//    }
 }
