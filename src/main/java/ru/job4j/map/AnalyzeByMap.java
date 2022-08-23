@@ -1,8 +1,6 @@
 package ru.job4j.map;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class AnalyzeByMap {
     public static double averageScore(List<Pupil> pupils) {
@@ -32,16 +30,15 @@ public class AnalyzeByMap {
     }
 
     public static List<Label> averageScoreBySubject(List<Pupil> pupils) {
-        List<Subject> subjectList = pupils.get(0).subjects();
-        List<Label> averageScore = new ArrayList<>();
-        for (int i = 0; i < subjectList.size(); i++) {
-            double sum = 0;
-            int count = 0;
-            for (Pupil pupil : pupils) {
-                sum += pupil.subjects().get(i).score();
-                count++;
+        Map<String, Integer> subjectMap = new LinkedHashMap<>();
+        for (Pupil pupil : pupils) {
+            for (Subject subject : pupil.subjects()) {
+                subjectMap.merge(subject.name(), subject.score(), Integer::sum);
             }
-            averageScore.add(new Label(subjectList.get(i).name(), sum / count));
+        }
+        List<Label> averageScore = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : subjectMap.entrySet()) {
+            averageScore.add(new Label(entry.getKey(), ((double) entry.getValue() / pupils.size())));
         }
         return averageScore;
     }
@@ -55,21 +52,22 @@ public class AnalyzeByMap {
             }
             bestPupil.add(new Label(pupil.name(), sum));
         }
-        bestPupil.sort(Comparator.reverseOrder());
-        return bestPupil.get(0);
+        bestPupil.sort(Comparator.naturalOrder());
+        return bestPupil.get(pupils.size() - 1);
     }
 
     public static Label bestSubject(List<Pupil> pupils) {
-        List<Subject> subjectList = pupils.get(0).subjects();
-        List<Label> bestSubject = new ArrayList<>();
-        for (int i = 0; i < subjectList.size(); i++) {
-            double sum = 0;
-            for (Pupil pupil : pupils) {
-                sum += pupil.subjects().get(i).score();
+        Map<String, Integer> bestMap = new LinkedHashMap<>();
+        for (Pupil pupil : pupils) {
+            for (Subject subject : pupil.subjects()) {
+                bestMap.merge(subject.name(), subject.score(), Integer::sum);
             }
-            bestSubject.add(new Label(subjectList.get(i).name(), sum));
         }
-        bestSubject.sort(Comparator.reverseOrder());
-        return bestSubject.get(0);
+        List<Label> bestSubject = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : bestMap.entrySet()) {
+            bestSubject.add(new Label(entry.getKey(), (double) entry.getValue()));
+        }
+        bestSubject.sort(Comparator.naturalOrder());
+        return bestSubject.get(bestSubject.size() - 1);
     }
 }
